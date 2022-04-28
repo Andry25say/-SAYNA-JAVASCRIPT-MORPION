@@ -20,7 +20,17 @@ const conditionDeVictoire =
 [2,4,6],
 
 ]
-const tourJoueurs =() =>`c'est au tour du joueur ${joueurActif}`;
+let restart = document.querySelector(".reset");
+    restart.addEventListener("click",renouveller)
+function renouveller(){
+    jeuActive = true;
+    joueurActif ="X";
+    etatDuJeux =  ["","","","","","","","",""];
+    etatDuJeux.innerHTML = tourJoueurs();
+    document.querySelectorAll(".grid-item").forEach(caz => caz.innerHTML = "");
+   
+}
+const tourJoueurs =() =>`${joueurActif}`;
 
 tour.innerHTML = tourJoueurs();
 
@@ -62,12 +72,14 @@ function verificationVictoire(){
             afficheVictoire.style.display="block";
         let fermer = document.querySelector(".end-game");
             fermer.addEventListener("click",() => {afficheVictoire.style.display="none"});
+            
     }
     if(!etatDuJeux.includes("")){
         let afficheNul = document.querySelector(".layer3");
         afficheNul.style.display="block";
         let recommencer = document.querySelector(".draw");
             recommencer.addEventListener("click",() => {afficheNul.style.display="none"});
+     
     
     }
     joueurActif = joueurActif === "X"? "O": "X";
@@ -81,7 +93,7 @@ function verificationVictoire(){
     let choix2 = document.querySelector(".choose2");
 
         choix1.addEventListener("click",() => {pop1.style.display = "none"});
-        choix2.addEventListener("click",() => {pop1.style.display = "none"});
+        choix2.addEventListener("click",()=>{pop1.style.display = "none"});
 
 })();
             
