@@ -1,8 +1,10 @@
 (function() {
 
     // Récupération des cases à clicker
-    const items = document.getElementsByClassName('grid-item');
-    const tour = document.querySelector(".cpu-turn")
+    // const items = document.getElementsByClassName('grid-item');
+const tour = document.querySelector(".turn")
+
+
 
 let jeuActive = true;
 let joueurActif = "X";
@@ -24,26 +26,31 @@ let restart = document.querySelector(".reset");
     restart.addEventListener("click",renouveller)
 function renouveller(){
     jeuActive = true;
-    joueurActif ="X";
+    joueurActif ="";
     etatDuJeux =  ["","","","","","","","",""];
     etatDuJeux.innerHTML = tourJoueurs();
     document.querySelectorAll(".grid-item").forEach(caz => caz.innerHTML = "");
-   
+    pop1.style.display = "block";  
 }
-const tourJoueurs =() =>`${joueurActif}`;
+function finir(){
+    jeuActive = true;
+    joueurActif ="";
+    etatDuJeux =  ["","","","","","","","",""];
+    document.querySelectorAll(".grid-item").forEach(caz => caz.innerHTML = "")
+}
+const tourJoueurs =() =>` ${joueurActif}`;
 
 tour.innerHTML = tourJoueurs();
 
 let cases = document.querySelectorAll(".grid-item");
 
 
-    cases.forEach(caz =>caz.addEventListener("click",choiseCase));
+    cases.forEach(caz =>  caz.addEventListener("click",choiseCase));
 
 function choiseCase() {
   const indexCase = this.id;
   const chaqueCase = document.getElementById(indexCase);
 
-  console.log(indexCase)
   if (etatDuJeux[[...cases].indexOf(this)] !== "" || !jeuActive){
       return;
   }
@@ -72,21 +79,19 @@ function verificationVictoire(){
             afficheVictoire.style.display="block";
         let fermer = document.querySelector(".end-game");
             fermer.addEventListener("click",() => {afficheVictoire.style.display="none"});
-            
+        finir();      
     }
     if(!etatDuJeux.includes("")){
         let afficheNul = document.querySelector(".layer3");
         afficheNul.style.display="block";
         let recommencer = document.querySelector(".draw");
             recommencer.addEventListener("click",() => {afficheNul.style.display="none"});
-     
-    
+        finir();  
+       
     }
     joueurActif = joueurActif === "X"? "O": "X";
     tour.innerHTML = tourJoueurs();
 }
-
-
 
     const pop1 = document.querySelector(".layer");
     let choix1 = document.querySelector(".choose1");
