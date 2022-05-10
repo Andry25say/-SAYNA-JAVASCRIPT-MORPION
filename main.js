@@ -7,7 +7,7 @@ const tour = document.querySelector(".turn")
 
 
 let jeuActive = true;
-let joueurActif = "X";
+let joueurActif = "";
 let etatDuJeux = ["","","","","","","","",""];
 
 const conditionDeVictoire =
@@ -97,8 +97,14 @@ function verificationVictoire(){
     let choix1 = document.querySelector(".choose1");
     let choix2 = document.querySelector(".choose2");
 
-        choix1.addEventListener("click",() => {pop1.style.display = "none"});
-        choix2.addEventListener("click",()=>{pop1.style.display = "none"});
+        choix1.addEventListener("click",function(){
+            pop1.style.display = "none"
+            joueurActif = "X"
+
+        });
+        choix2.addEventListener("click",function(){
+            pop1.style.display = "none";
+            joueurActif ="O";
+        });
 
 })();
-            
